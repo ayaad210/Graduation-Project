@@ -1,0 +1,436 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("../fonts/flaticon.eot");
+	src: url("../fonts/flaticon.eot#iefix") format("embedded-opentype"),
+	url("../fonts/flaticon.woff") format("woff"),
+	url("../fonts/flaticon.ttf") format("truetype"),
+	url("../fonts/flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 13px;
+font-style: normal;
+margin-left: 0px;
+}.flaticon-add186:before {
+	content: "\e000";
+}
+.flaticon-adn2:before {
+	content: "\e001";
+}
+.flaticon-angle2:before {
+	content: "\e002";
+}
+.flaticon-antivirus:before {
+	content: "\e003";
+}
+.flaticon-arrow395:before {
+	content: "\e004";
+}
+.flaticon-arrow459:before {
+	content: "\e005";
+}
+.flaticon-arrow483:before {
+	content: "\e006";
+}
+.flaticon-arrow486:before {
+	content: "\e007";
+}
+.flaticon-arrow621:before {
+	content: "\e008";
+}
+.flaticon-arrowright:before {
+	content: "\e009";
+}
+.flaticon-bed30:before {
+	content: "\e00a";
+}
+.flaticon-bed39:before {
+	content: "\e00b";
+}
+.flaticon-biology:before {
+	content: "\e00c";
+}
+.flaticon-caduceus1:before {
+	content: "\e00d";
+}
+.flaticon-caduceus4:before {
+	content: "\e00e";
+}
+.flaticon-calculation:before {
+	content: "\e00f";
+}
+.flaticon-check52:before {
+	content: "\e010";
+}
+.flaticon-clear5:before {
+	content: "\e011";
+}
+.flaticon-clinic2:before {
+	content: "\e012";
+}
+.flaticon-clinic3:before {
+	content: "\e013";
+}
+.flaticon-clipboard44:before {
+	content: "\e014";
+}
+.flaticon-clipboard45:before {
+	content: "\e015";
+}
+.flaticon-comment3:before {
+	content: "\e016";
+}
+.flaticon-comment32:before {
+	content: "\e017";
+}
+.flaticon-cross106:before {
+	content: "\e018";
+}
+.flaticon-cross97:before {
+	content: "\e019";
+}
+.flaticon-delete30:before {
+	content: "\e01a";
+}
+.flaticon-delete84:before {
+	content: "\e01b";
+}
+.flaticon-doctor2:before {
+	content: "\e01c";
+}
+.flaticon-down119:before {
+	content: "\e01d";
+}
+.flaticon-down14:before {
+	content: "\e01e";
+}
+.flaticon-down67:before {
+	content: "\e01f";
+}
+.flaticon-drugs5:before {
+	content: "\e020";
+}
+.flaticon-ecg2:before {
+	content: "\e021";
+}
+.flaticon-electrocardiogram1:before {
+	content: "\e022";
+}
+.flaticon-electrocardiogram3:before {
+	content: "\e023";
+}
+.flaticon-electrocardiogram4:before {
+	content: "\e024";
+}
+.flaticon-email21:before {
+	content: "\e025";
+}
+.flaticon-expand22:before {
+	content: "\e026";
+}
+.flaticon-expand38:before {
+	content: "\e027";
+}
+.flaticon-eye46:before {
+	content: "\e028";
+}
+.flaticon-facebook12:before {
+	content: "\e029";
+}
+.flaticon-facebook29:before {
+	content: "\e02a";
+}
+.flaticon-facebook3:before {
+	content: "\e02b";
+}
+.flaticon-facebook30:before {
+	content: "\e02c";
+}
+.flaticon-facebook31:before {
+	content: "\e02d";
+}
+.flaticon-facebook4:before {
+	content: "\e02e";
+}
+.flaticon-facebook55:before {
+	content: "\e02f";
+}
+.flaticon-first21:before {
+	content: "\e030";
+}
+.flaticon-firstaid:before {
+	content: "\e031";
+}
+.flaticon-flickr6:before {
+	content: "\e032";
+}
+.flaticon-google110:before {
+	content: "\e033";
+}
+.flaticon-google116:before {
+	content: "\e034";
+}
+.flaticon-heart161:before {
+	content: "\e035";
+}
+.flaticon-heart256:before {
+	content: "\e036";
+}
+.flaticon-heart27:before {
+	content: "\e037";
+}
+.flaticon-heart285:before {
+	content: "\e038";
+}
+.flaticon-heart305:before {
+	content: "\e039";
+}
+.flaticon-heart367:before {
+	content: "\e03a";
+}
+.flaticon-human90:before {
+	content: "\e03b";
+}
+.flaticon-injection:before {
+	content: "\e03c";
+}
+.flaticon-instagram11:before {
+	content: "\e03d";
+}
+.flaticon-instagram12:before {
+	content: "\e03e";
+}
+.flaticon-instagram13:before {
+	content: "\e03f";
+}
+.flaticon-instagram19:before {
+	content: "\e040";
+}
+.flaticon-islam14:before {
+	content: "\e041";
+}
+.flaticon-left161:before {
+	content: "\e042";
+}
+.flaticon-left207:before {
+	content: "\e043";
+}
+.flaticon-left33:before {
+	content: "\e044";
+}
+.flaticon-life3:before {
+	content: "\e045";
+}
+.flaticon-light59:before {
+	content: "\e046";
+}
+.flaticon-linkedin12:before {
+	content: "\e047";
+}
+.flaticon-login10:before {
+	content: "\e048";
+}
+.flaticon-login11:before {
+	content: "\e049";
+}
+.flaticon-magnifier12:before {
+	content: "\e04a";
+}
+.flaticon-magnifier56:before {
+	content: "\e04b";
+}
+.flaticon-magnifying47:before {
+	content: "\e04c";
+}
+.flaticon-magnifyingglass16:before {
+	content: "\e04d";
+}
+.flaticon-mail59:before {
+	content: "\e04e";
+}
+.flaticon-male80:before {
+	content: "\e04f";
+}
+.flaticon-man412:before {
+	content: "\e050";
+}
+.flaticon-medical1:before {
+	content: "\e051";
+}
+.flaticon-medical14:before {
+	content: "\e052";
+}
+.flaticon-medical50:before {
+	content: "\e053";
+}
+.flaticon-medicalequipment:before {
+	content: "\e054";
+}
+.flaticon-medicalequipment1:before {
+	content: "\e055";
+}
+.flaticon-medication4:before {
+	content: "\e056";
+}
+.flaticon-medication5:before {
+	content: "\e057";
+}
+.flaticon-medicine2:before {
+	content: "\e058";
+}
+.flaticon-medicine40:before {
+	content: "\e059";
+}
+.flaticon-medicine41:before {
+	content: "\e05a";
+}
+.flaticon-minussign2:before {
+	content: "\e05b";
+}
+.flaticon-minus:before {
+	content: "\e05c";
+}
+.flaticon-minus25:before {
+	content: "\e05d";
+}
+.flaticon-minus42:before {
+	content: "\e05e";
+}
+.flaticon-minus53:before {
+	content: "\e05f";
+}
+.flaticon-molar2:before {
+	content: "\e060";
+}
+.flaticon-negative12:before {
+	content: "\e061";
+}
+.flaticon-next15:before {
+	content: "\e062";
+}
+.flaticon-patient2:before {
+	content: "\e063";
+}
+.flaticon-patient5:before {
+	content: "\e064";
+}
+.flaticon-pencil43:before {
+	content: "\e065";
+}
+.flaticon-perfusion:before {
+	content: "\e066";
+}
+.flaticon-photos12:before {
+	content: "\e067";
+}
+.flaticon-pinterest34:before {
+	content: "\e068";
+}
+.flaticon-plus13:before {
+	content: "\e069";
+}
+.flaticon-positive3:before {
+	content: "\e06a";
+}
+.flaticon-pulse1:before {
+	content: "\e06b";
+}
+.flaticon-rightarrow26:before {
+	content: "\e06c";
+}
+.flaticon-right154:before {
+	content: "\e06d";
+}
+.flaticon-search74:before {
+	content: "\e06e";
+}
+.flaticon-shower17:before {
+	content: "\e06f";
+}
+.flaticon-shower18:before {
+	content: "\e070";
+}
+.flaticon-skeleton:before {
+	content: "\e071";
+}
+.flaticon-socialnetwork34:before {
+	content: "\e072";
+}
+.flaticon-social140:before {
+	content: "\e073";
+}
+.flaticon-speechbubble17:before {
+	content: "\e074";
+}
+.flaticon-speech18:before {
+	content: "\e075";
+}
+.flaticon-stethoscope:before {
+	content: "\e076";
+}
+.flaticon-stethoscope1:before {
+	content: "\e077";
+}
+.flaticon-stethoscope11:before {
+	content: "\e078";
+}
+.flaticon-stethoscope12:before {
+	content: "\e079";
+}
+.flaticon-stethoscope2:before {
+	content: "\e07a";
+}
+.flaticon-supplies:before {
+	content: "\e07b";
+}
+.flaticon-syringe:before {
+	content: "\e07c";
+}
+.flaticon-syringe6:before {
+	content: "\e07d";
+}
+.flaticon-syrup1:before {
+	content: "\e07e";
+}
+.flaticon-test1:before {
+	content: "\e07f";
+}
+.flaticon-twitter:before {
+	content: "\e080";
+}
+.flaticon-twitter1:before {
+	content: "\e081";
+}
+.flaticon-twitter12:before {
+	content: "\e082";
+}
+.flaticon-twitter2:before {
+	content: "\e083";
+}
+.flaticon-up151:before {
+	content: "\e084";
+}
+.flaticon-verification5:before {
+	content: "\e085";
+}
+.flaticon-vimeo23:before {
+	content: "\e086";
+}
+.flaticon-webdesign3:before {
+	content: "\e087";
+}
+.flaticon-woman139:before {
+	content: "\e088";
+}
+.flaticon-xray:before {
+	content: "\e089";
+}
+.flaticon-youtube18:before {
+	content: "\e08a";
+}
+.flaticon-youtube30:before {
+	content: "\e08b";
+}

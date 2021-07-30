@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="556a21fcd0c04a13943baa933866bcde" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AdressDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Area" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FeedBack" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Map" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Request" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Schedual" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Type" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Worker" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_AdressDetails_Areas" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AdressDetails_Maps" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Requests_AdressDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Areas_Citys" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Requests_Scheduals" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Scheduals_Workers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Workers_Types" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Complaint" Width="1.5" PointX="7.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

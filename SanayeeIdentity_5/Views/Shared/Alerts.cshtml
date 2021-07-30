@@ -1,0 +1,31 @@
+﻿
+<span style="color:red" id="Req"> </span>
+<script>
+
+
+  myVar = setInterval(myTimer, 3000);
+
+  function myTimer() {
+
+      $.ajax({
+          url: '@Url.Action("GetReqInlastTwoMin", "MainWorker")',
+          type: "POST",
+          dataType: "json",
+        
+          processData: false,
+          contentType: false,
+          success: function (data) {
+              
+              document.getElementById('Req').innerHTML = data;
+
+          },
+          error: function (err) {
+
+              document.getElementById('emsg').innerHTML = err;
+          }  });
+  }
+
+
+  
+     
+</script> 

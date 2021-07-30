@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdressDetails">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mapid" Type="int" />
+        </EntityType>
+        <EntityType Name="Areas">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Citys">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="ComplaintId" />
+          </Key>
+          <Property Name="ComplaintId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Workerid" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="datetime" Type="datetime" Nullable="false" />
+          <Property Name="Userid" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="MessageHead" Type="nvarchar" MaxLength="150" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="FeebBackId" />
+          </Key>
+          <Property Name="FeebBackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="TitLe" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Maps">
+          <Key>
+            <PropertyRef Name="MapId" />
+          </Key>
+          <Property Name="MapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="10" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ScedualId" Type="int" Nullable="false" />
+          <Property Name="RequestDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="AddressId" Type="int" />
+        </EntityType>
+        <EntityType Name="Scheduals">
+          <Key>
+            <PropertyRef Name="ScedualId" />
+          </Key>
+          <Property Name="ScedualId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkerId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="PaidRate" Type="nchar" MaxLength="10" />
+          <Property Name="Price" Type="decimal" Precision="9" Scale="2" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="PriceForMonth" Type="decimal" Precision="9" Scale="2" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="SBIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="Onwork" Type="bit" />
+          <Property Name="Available" Type="bit" />
+          <Property Name="TotalRate" Type="int" />
+          <Property Name="PhotoBin" Type="varbinary(max)" />
+          <Property Name="TypeId" Type="int" />
+        </EntityType>
+        <Association Name="FK_AdressDetails_Areas">
+          <End Role="Areas" Type="Self.Areas" Multiplicity="0..1" />
+          <End Role="AdressDetails" Type="Self.AdressDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Areas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="AdressDetails">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdressDetails_Maps">
+          <End Role="Maps" Type="Self.Maps" Multiplicity="0..1" />
+          <End Role="AdressDetails" Type="Self.AdressDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maps">
+              <PropertyRef Name="MapId" />
+            </Principal>
+            <Dependent Role="AdressDetails">
+              <PropertyRef Name="Mapid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Areas_Citys">
+          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+          <End Role="Areas" Type="Self.Areas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citys">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Areas">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_AdressDetails">
+          <End Role="AdressDetails" Type="Self.AdressDetails" Multiplicity="0..1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDetails">
+              <PropertyRef Name="AdressId" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Scheduals">
+          <End Role="Scheduals" Type="Self.Scheduals" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scheduals">
+              <PropertyRef Name="ScedualId" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ScedualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduals_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="Scheduals" Type="Self.Scheduals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="WorkerId" />
+            </Principal>
+            <Dependent Role="Scheduals">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AdressDetails" EntityType="Self.AdressDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maps" EntityType="Self.Maps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scheduals" EntityType="Self.Scheduals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdressDetails_Areas" Association="Self.FK_AdressDetails_Areas">
+            <End Role="Areas" EntitySet="Areas" />
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdressDetails_Maps" Association="Self.FK_AdressDetails_Maps">
+            <End Role="Maps" EntitySet="Maps" />
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Areas_Citys" Association="Self.FK_Areas_Citys">
+            <End Role="Citys" EntitySet="Citys" />
+            <End Role="Areas" EntitySet="Areas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_AdressDetails" Association="Self.FK_Requests_AdressDetails">
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Scheduals" Association="Self.FK_Requests_Scheduals">
+            <End Role="Scheduals" EntitySet="Scheduals" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduals_Workers" Association="Self.FK_Scheduals_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Scheduals" EntitySet="Scheduals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Types" Association="Self.FK_Workers_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdressDetail">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mapid" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_AdressDetails_Areas" FromRole="AdressDetails" ToRole="Areas" />
+          <NavigationProperty Name="Map" Relationship="Self.FK_AdressDetails_Maps" FromRole="AdressDetails" ToRole="Maps" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_AdressDetails" FromRole="AdressDetails" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AdressDetails" Relationship="Self.FK_AdressDetails_Areas" FromRole="Areas" ToRole="AdressDetails" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Areas_Citys" FromRole="Areas" ToRole="Citys" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Areas" Relationship="Self.FK_Areas_Citys" FromRole="Citys" ToRole="Areas" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="FeebBackId" />
+          </Key>
+          <Property Name="FeebBackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TitLe" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Map">
+          <Key>
+            <PropertyRef Name="MapId" />
+          </Key>
+          <Property Name="MapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="10" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="10" Nullable="false" />
+          <NavigationProperty Name="AdressDetails" Relationship="Self.FK_AdressDetails_Maps" FromRole="Maps" ToRole="AdressDetails" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScedualId" Type="Int32" Nullable="false" />
+          <Property Name="RequestDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" />
+          <NavigationProperty Name="AdressDetail" Relationship="Self.FK_Requests_AdressDetails" FromRole="Requests" ToRole="AdressDetails" />
+          <NavigationProperty Name="Schedual" Relationship="Self.FK_Requests_Scheduals" FromRole="Requests" ToRole="Scheduals" />
+        </EntityType>
+        <EntityType Name="Schedual">
+          <Key>
+            <PropertyRef Name="ScedualId" />
+          </Key>
+          <Property Name="ScedualId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkerId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="PaidRate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="9" Scale="2" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Scheduals" FromRole="Scheduals" ToRole="Requests" />
+          <NavigationProperty Name="Worker" Relationship="Self.FK_Scheduals_Workers" FromRole="Scheduals" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PriceForMonth" Type="Decimal" Precision="9" Scale="2" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Types" FromRole="Types" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SBIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Onwork" Type="Boolean" />
+          <Property Name="Available" Type="Boolean" />
+          <Property Name="TotalRate" Type="Int32" />
+          <Property Name="PhotoBin" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <NavigationProperty Name="Scheduals" Relationship="Self.FK_Scheduals_Workers" FromRole="Workers" ToRole="Scheduals" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Workers_Types" FromRole="Workers" ToRole="Types" />
+        </EntityType>
+        <Association Name="FK_AdressDetails_Areas">
+          <End Role="Areas" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="AdressDetails" Type="Self.AdressDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Areas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="AdressDetails">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdressDetails_Maps">
+          <End Role="Maps" Type="Self.Map" Multiplicity="0..1" />
+          <End Role="AdressDetails" Type="Self.AdressDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maps">
+              <PropertyRef Name="MapId" />
+            </Principal>
+            <Dependent Role="AdressDetails">
+              <PropertyRef Name="Mapid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_AdressDetails">
+          <End Role="AdressDetails" Type="Self.AdressDetail" Multiplicity="0..1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDetails">
+              <PropertyRef Name="AdressId" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Areas_Citys">
+          <End Role="Citys" Type="Self.City" Multiplicity="1" />
+          <End Role="Areas" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citys">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Areas">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Scheduals">
+          <End Role="Scheduals" Type="Self.Schedual" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scheduals">
+              <PropertyRef Name="ScedualId" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ScedualId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduals_Workers">
+          <End Role="Workers" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Scheduals" Type="Self.Schedual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="WorkerId" />
+            </Principal>
+            <Dependent Role="Scheduals">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Types">
+          <End Role="Types" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Worker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdressDetails" EntityType="Self.AdressDetail" />
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Citys" EntityType="Self.City" />
+          <EntitySet Name="FeedBacks" EntityType="Self.FeedBack" />
+          <EntitySet Name="Maps" EntityType="Self.Map" />
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Scheduals" EntityType="Self.Schedual" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="Workers" EntityType="Self.Worker" />
+          <AssociationSet Name="FK_AdressDetails_Areas" Association="Self.FK_AdressDetails_Areas">
+            <End Role="Areas" EntitySet="Areas" />
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdressDetails_Maps" Association="Self.FK_AdressDetails_Maps">
+            <End Role="Maps" EntitySet="Maps" />
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_AdressDetails" Association="Self.FK_Requests_AdressDetails">
+            <End Role="AdressDetails" EntitySet="AdressDetails" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Areas_Citys" Association="Self.FK_Areas_Citys">
+            <End Role="Citys" EntitySet="Citys" />
+            <End Role="Areas" EntitySet="Areas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Scheduals" Association="Self.FK_Requests_Scheduals">
+            <End Role="Scheduals" EntitySet="Scheduals" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduals_Workers" Association="Self.FK_Scheduals_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Scheduals" EntitySet="Scheduals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Types" Association="Self.FK_Workers_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <EntitySet Name="Complaints" EntityType="Model.Complaint" />
+        </EntityContainer>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="ComplaintId" />
+          </Key>
+          <Property Name="ComplaintId" Type="Int32" Nullable="false" />
+          <Property Name="Workerid" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Userid" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MessageHead" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AdressDetails">
+            <EntityTypeMapping TypeName="Model.AdressDetail">
+              <MappingFragment StoreEntitySet="AdressDetails">
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Mapid" ColumnName="Mapid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="Model.Area">
+              <MappingFragment StoreEntitySet="Areas">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citys">
+            <EntityTypeMapping TypeName="Model.City">
+              <MappingFragment StoreEntitySet="Citys">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedBacks">
+            <EntityTypeMapping TypeName="Model.FeedBack">
+              <MappingFragment StoreEntitySet="FeedBack">
+                <ScalarProperty Name="FeebBackId" ColumnName="FeebBackId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TitLe" ColumnName="TitLe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maps">
+            <EntityTypeMapping TypeName="Model.Map">
+              <MappingFragment StoreEntitySet="Maps">
+                <ScalarProperty Name="MapId" ColumnName="MapId" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="Model.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="ScedualId" ColumnName="ScedualId" />
+                <ScalarProperty Name="RequestDateTime" ColumnName="RequestDateTime" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scheduals">
+            <EntityTypeMapping TypeName="Model.Schedual">
+              <MappingFragment StoreEntitySet="Scheduals">
+                <ScalarProperty Name="ScedualId" ColumnName="ScedualId" />
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="PaidRate" ColumnName="PaidRate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="Model.Type">
+              <MappingFragment StoreEntitySet="Types">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PriceForMonth" ColumnName="PriceForMonth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="Model.Worker">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SBIN" ColumnName="SBIN" />
+                <ScalarProperty Name="Onwork" ColumnName="Onwork" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="TotalRate" ColumnName="TotalRate" />
+                <ScalarProperty Name="PhotoBin" ColumnName="PhotoBin" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complaints">
+            <EntityTypeMapping TypeName="Model.Complaint">
+              <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="MessageHead" ColumnName="MessageHead" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="Workerid" ColumnName="Workerid" />
+                <ScalarProperty Name="ComplaintId" ColumnName="ComplaintId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

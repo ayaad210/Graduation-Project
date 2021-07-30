@@ -1,0 +1,140 @@
+﻿@model  SanayeeIdentity_5.Models.ClientViewModel
+@using SanayeeIdentity_5.Data;
+@{
+    ViewBag.Title = "ClientPrifile";
+}
+
+<h2>ClientPrifile</h2>
+
+
+<h2>WorkerProfile</h2>
+
+@using (Html.BeginForm("ClientProfile", "Client", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @*@Html.Hidden("Email", Model.Email)*@
+    @*@Html.Hidden("ConfirmPassword", Model.ConfirmPassword)*@
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+  
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.PhoneNumber, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <h6>---------------------------------------------------------------------------------------------------------------------</h6>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityId, "CityID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (ViewBag.Citys != null)
+                {
+                    @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.CityId, ViewBag.Citys as SelectList, "--- Select City ---", new { @class = "form-control" });
+                }
+                else
+                {
+                    <h2> Plz Insert Catgories</h2>
+                }
+                @Html.ValidationMessageFor(model => model.CityId, " ", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AreaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AreaId, ViewBag.Areas as SelectList, " -- Select Area -- ", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <h6>---------------------------------------------------------------------------------------------------------------------</h6>
+
+      
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Edit" />
+            </div>
+        </div>
+
+
+
+                }
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $("#CityId").change(function () {
+                $.get("/Client/GetAreaList", { CityId: $("#CityId").val() }, function (data) {
+                    $("#AreaId").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#AreaId").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+
+
+
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#CityId").change(function () {
+                $.get("/Client/GetAreaList", { CityId: $("#CityId").val() }, function (data) {
+                    $("#AreaId").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#AreaId").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+
+
+
+        });
+    </script>
+
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@section Styles{
+    <style>
+       
+    </style>
+}

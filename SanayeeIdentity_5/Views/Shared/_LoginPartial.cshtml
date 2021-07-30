@@ -1,0 +1,123 @@
+﻿@*@using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@using SanayeeIdentity_5.Models;
+
+@if (Request.IsAuthenticated)
+{
+    ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+    }
+    if (user.Roles.Where(r => r.RoleId == new ApplicationDbContext().Roles.Where(rr => rr.Name == "Admins").First().Id).ToList().Count > 0)
+    {
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(" Employees", "EmployeeeList", "Admin")
+            </li>
+            <li>
+                @Html.ActionLink(" Reports", "SummeryPage", "Report")
+            </li>
+            <li>
+                @Html.ActionLink("manage Cites ", "Index", "Cities")
+            </li>
+            <li>
+                @Html.ActionLink("manage Areas ", "Index", "Areas")
+            </li>
+            <li>
+                @Html.ActionLink("manage Types ", "Index", "Types")
+            </li>
+        </ul>
+    }
+
+
+    if (user.Roles.Where(r => r.RoleId == new ApplicationDbContext().Roles.Where(rr => rr.Name == "Worker").First().Id).ToList().Count > 0)
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("فترات السماح", "WorkerSceduasls", "MainWorker", routeValues: new { UserId = user.Id }, htmlAttributes: new { title = "Manage" })
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("البروفايلٍ", "WorkerProfile", "MainWorker", routeValues: new { UserId = user.Id }, htmlAttributes: new { title = "Manage" })
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li style="border:2px dashed yellow ">
+                @Html.Partial("Alerts")
+            </li>
+
+        </ul>
+    }
+
+    if (user.Roles.Where(r => r.RoleId == new ApplicationDbContext().Roles.Where(rr => rr.Name == "Client").First().Id).ToList().Count > 0)
+    {
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(" Request", actionName: "Index", controllerName: "Requests")
+            </li>
+            <li>
+                @Html.ActionLink("Applied Requests", "ClientRequsts", "Client", routeValues: new { ClientId = user.Id }, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li>
+                @Html.ActionLink("Profile", "ClientProfile", "Client", routeValues: new { UserId = user.Id }, htmlAttributes: new { title = "Manage" })
+            </li>
+        </ul>
+    }
+    if (user.Roles.Where(r => r.RoleId == new ApplicationDbContext().Roles.Where(rr => rr.Name == "Employee").First().Id).ToList().Count > 0)
+    {
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(" Manage Workers", "Index", "Employee")
+            </li>
+
+        </ul>
+    }
+}
+
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink(" سجل كعميل", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("سجل ك صنيعى", "WorkerRegister", "MainWorker", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+    </ul>
+
+}

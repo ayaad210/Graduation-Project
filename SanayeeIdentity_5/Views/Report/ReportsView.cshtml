@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "ReportsView";
+}
+
+<h2>ReportsView</h2>
+
+<div class="row">
+
+    <div class="form-group col-lg-4  ">
+    
+         <label>Requsts Reports</label>
+           @using (Html.BeginForm("RequstsPrintReport", "Report"))
+        {
+
+
+            @*@Html.TextBox("NameAjax", null, new { @class = "form-control" })*@
+         
+            @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownList("Years", ViewBag.Years as SelectList, "select Year", new { @class = "form-control col-lg-12" })
+       
+            @Html.DropDownList("Months", ViewBag.Months as SelectList, "select month", new { @class = "form-control col-lg-12" })
+          
+            @Html.DropDownList("Cites", ViewBag.Cites as SelectList, "select city", new { @class = "form-control col-lg-12" })
+        
+            @Html.DropDownList("Areas", ViewBag.Areas as SelectList, "select Area", new { @class = "form-control col-lg-12" })
+         
+            <input type="submit" name="PrintFile" value="Word" id="btn2" class="btn btn-success  form-control col-lg-12" />
+        
+            <input type="submit" name="PrintFile" value="PDF" id="btn2" class="btn btn-success  form-control col-lg-12" />
+          
+            <input type="submit" name="PrintFile" value="Exel" id="btn2" class="btn btn-success  form-control col-lg-12" />
+     
+            <input type="submit" name="PrintFile" value="Image" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+        }
+
+
+
+
+
+
+    </div>
+
+    <div class="form-group col-lg-4  ">
+        <label>Prices Reports</label>
+
+          @using (Html.BeginForm("PricesPrintReport", "Report"))
+        {
+
+
+            @*@Html.TextBox("NameAjax", null, new { @class = "form-control" })*@
+
+            @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownList("Types", ViewBag.Types as SelectList, "select Type", new { @class = "form-control col-lg-12" })
+
+               @Html.DropDownList("Years", ViewBag.Years as SelectList, "select Year", new { @class = "form-control col-lg-12" })
+
+            @Html.DropDownList("Months", ViewBag.Months as SelectList, "select month", new { @class = "form-control col-lg-12" })
+
+
+            <input type="submit" name="PrintFile" value="Word" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="PDF" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="Exel" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="Image" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+        }
+
+
+
+
+
+
+    </div>
+
+    <div class="form-group col-lg-4  ">
+        <label>Number Of  Workers Reports</label>
+        @using (Html.BeginForm("NumOfWorkersPerCityPrintReport", "Report"))
+        {
+
+
+            @*@Html.TextBox("NameAjax", null, new { @class = "form-control" })*@
+
+            @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownList("Types", ViewBag.Types as SelectList, "select Type", new { @class = "form-control col-lg-12" })
+
+
+            @Html.DropDownList("Cites2", ViewBag.Cites as SelectList, "select city", new { @class = "form-control col-lg-12" })
+
+            @Html.DropDownList("Areas2", ViewBag.Areas as SelectList, "select Area", new { @class = "form-control col-lg-12" })
+
+            <input type="submit" name="PrintFile" value="Word" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="PDF" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="Exel" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+            <input type="submit" name="PrintFile" value="Image" id="btn2" class="btn btn-success  form-control col-lg-12" />
+
+        }
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+@section Scripts{
+
+<script>
+        $(document).ready(function () {
+
+            $("#Cites").change(function () {
+                $.get("/Report/GetAreaList", { CityId: $("#Cites").val() }, function (data) {
+                    $("#Areas").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#Areas").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+            $("#Cites2").change(function () {
+                $.get("/Report/GetAreaList", { CityId: $("#Cites2").val() }, function (data) {
+                    $("#Areas2").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#Areas2").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+
+
+        });
+</script>
+    }

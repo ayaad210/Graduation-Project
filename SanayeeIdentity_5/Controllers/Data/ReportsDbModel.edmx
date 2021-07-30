@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'aspnet-SanyeeIdentity6.dbo.NumOfWorekerPerCityArea' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NumOfWorekerPerCityArea">
+          <Key>
+            <PropertyRef Name="AreaName" />
+          </Key>
+          <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NumOFWorkrs" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'aspnet-SanyeeIdentity6.dbo.PricesInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PricesInfo">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="typename" Type="nvarchar" MaxLength="100" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="Prices" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'aspnet-SanyeeIdentity6.dbo.RequstsInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RequstsInfo">
+          <Key>
+            <PropertyRef Name="workrrname" />
+            <PropertyRef Name="AreaName" />
+          </Key>
+          <Property Name="typename" Type="nvarchar" MaxLength="100" />
+          <Property Name="workrrname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="cityid" Type="nvarchar" MaxLength="100" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="NumofReqursts" Type="int" />
+        </EntityType>
+        <Function Name="RequstsInMonthOfYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TypeRequstsInMonthOfYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="NumOfWorekerPerCityArea" EntityType="Self.NumOfWorekerPerCityArea" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NumOfWorekerPerCityArea].[CityName] AS [CityName], 
+    [NumOfWorekerPerCityArea].[AreaName] AS [AreaName], 
+    [NumOfWorekerPerCityArea].[TypeName] AS [TypeName], 
+    [NumOfWorekerPerCityArea].[NumOFWorkrs] AS [NumOFWorkrs]
+    FROM [dbo].[NumOfWorekerPerCityArea] AS [NumOfWorekerPerCityArea]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PricesInfo" EntityType="Self.PricesInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PricesInfo].[TypeId] AS [TypeId], 
+    [PricesInfo].[typename] AS [typename], 
+    [PricesInfo].[year] AS [year], 
+    [PricesInfo].[month] AS [month], 
+    [PricesInfo].[Prices] AS [Prices]
+    FROM [dbo].[PricesInfo] AS [PricesInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RequstsInfo" EntityType="Self.RequstsInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RequstsInfo].[typename] AS [typename], 
+    [RequstsInfo].[workrrname] AS [workrrname], 
+    [RequstsInfo].[cityid] AS [cityid], 
+    [RequstsInfo].[AreaName] AS [AreaName], 
+    [RequstsInfo].[year] AS [year], 
+    [RequstsInfo].[month] AS [month], 
+    [RequstsInfo].[NumofReqursts] AS [NumofReqursts]
+    FROM [dbo].[RequstsInfo] AS [RequstsInfo]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PricesInfo">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="typename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="Prices" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="RequstsInfo">
+          <Key>
+            <PropertyRef Name="workrrname" />
+            <PropertyRef Name="AreaName" />
+          </Key>
+          <Property Name="typename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="workrrname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cityid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="NumofReqursts" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PricesInfoes" EntityType="Self.PricesInfo" />
+          <EntitySet Name="RequstsInfoes" EntityType="Self.RequstsInfo" />
+          <FunctionImport Name="TypeRequstsInMonthOfYear" ReturnType="Collection(Model1.TypeRequstsInMonthOfYear_Result)">
+          <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RequstsInMonthOfYear" ReturnType="Collection(Model1.RequstsInMonthOfYear_Result)">
+          <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="NumOfWorekerPerCityAreas" EntityType="Model1.NumOfWorekerPerCityArea" />
+        </EntityContainer>
+        <ComplexType Name="TypeRequstsInMonthOfYear_Result">
+          <Property Type="String" Name="typename" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="year" Nullable="true" />
+          <Property Type="Int32" Name="month" Nullable="true" />
+          <Property Type="Int32" Name="numofrequsts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RequstsInMonthOfYear_Result">
+          <Property Type="Int32" Name="year" Nullable="true" />
+          <Property Type="Int32" Name="month" Nullable="true" />
+          <Property Type="Int32" Name="numofrequsts" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="NumOfWorekerPerCityArea">
+          <Key>
+            <PropertyRef Name="AreaName" />
+          </Key>
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AreaName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumOFWorkrs" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="PricesInfoes">
+            <EntityTypeMapping TypeName="Model1.PricesInfo">
+              <MappingFragment StoreEntitySet="PricesInfo">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="Prices" ColumnName="Prices" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequstsInfoes">
+            <EntityTypeMapping TypeName="Model1.RequstsInfo">
+              <MappingFragment StoreEntitySet="RequstsInfo">
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="workrrname" ColumnName="workrrname" />
+                <ScalarProperty Name="cityid" ColumnName="cityid" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="NumofReqursts" ColumnName="NumofReqursts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TypeRequstsInMonthOfYear" FunctionName="Model1.Store.TypeRequstsInMonthOfYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.TypeRequstsInMonthOfYear_Result">
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="numofrequsts" ColumnName="numofrequsts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RequstsInMonthOfYear" FunctionName="Model1.Store.RequstsInMonthOfYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.RequstsInMonthOfYear_Result">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="numofrequsts" ColumnName="numofrequsts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="NumOfWorekerPerCityAreas">
+            <EntityTypeMapping TypeName="Model1.NumOfWorekerPerCityArea">
+              <MappingFragment StoreEntitySet="NumOfWorekerPerCityArea">
+                <ScalarProperty Name="NumOFWorkrs" ColumnName="NumOFWorkrs" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

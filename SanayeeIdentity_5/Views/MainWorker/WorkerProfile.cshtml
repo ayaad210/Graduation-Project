@@ -1,0 +1,223 @@
+﻿
+
+
+
+@model  SanayeeIdentity_5.Models.WorkerRegisterViewModel
+@using SanayeeIdentity_5.Data;
+@{
+    ViewBag.Title = "WorkerProfile";
+}
+
+
+<h2>WorkerProfile</h2>
+
+@using (Html.BeginForm("WorkerProfile", "MainWorker", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.Hidden("Email", Model.Email)
+    @Html.Hidden("Password", Model.Password)
+    @Html.Hidden("ConfirmPassword", Model.ConfirmPassword)
+    @Html.Hidden("ISBN", Model.ISBN)
+    @Html.Hidden("userid", Model.userid)
+    @Html.Hidden("TypeId", Model.typeid)
+
+    <div class="form-group">
+        @Html.Label("Photo", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(m => m.Name, new { @class = "form-control" })*@
+            @{
+                var imgsrc = string.Empty;
+                if (Model.PhotoBin != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.PhotoBin);
+                    imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                }
+                else
+                {
+
+                    imgsrc = "/Images/pT78y5n8c.jpg";
+                }
+
+            }
+
+            <img src="@imgsrc" width="100" height="100" id="DbImg" />
+
+                <br/><br />
+            <input type="file" value="Edit Images" name="image1" class="form-control" id="image1" />
+            <img id="ShowImage" />
+            <p id="Error"></p>
+        </div>
+
+    </div>
+    @*<div class="form-group">*@
+    @*<div class="col-md-10">
+        <input type="file" value="Edit Images" name="image1" class="form-control" id="image1" />
+        <img id="ShowImage" />
+        <p id="Error"></p>
+        @*</div>*@
+
+    @*</div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @*<h6>Work</h6>*@
+        @Html.Label("Worker", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @{ string Type = new Entities().Types.Where(t => t.TypeId == Model.typeid).First().Name;}
+            @Type
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.PhoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <h6>---------------------------------------------------------------------------------------------------------------------</h6>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityId, "CityID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (ViewBag.Citys != null)
+            {
+                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.CityId, ViewBag.Citys as SelectList, "--- Select City ---", new { @class = "form-control" });
+            }
+            else
+            {
+                <h2> Plz Insert Catgories</h2>
+            }
+            @Html.ValidationMessageFor(model => model.CityId, " ", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AreaId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.AreaId, ViewBag.Areas as SelectList, " -- Select Area -- ", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <h6>---------------------------------------------------------------------------------------------------------------------</h6>
+
+    <div class="form-group">
+        Is Available ?
+        <div class="col-md-10">
+            @Html.CheckBoxFor(model => model.IsAvailable, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Save" />
+        </div>
+    </div>
+
+
+
+}
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $("#CityId").change(function () {
+                $.get("/MainWorker/GetAreaList", { CityId: $("#CityId").val() }, function (data) {
+                    $("#AreaId").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#AreaId").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+
+
+
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#CityId").change(function () {
+                $.get("/MainWorker/GetAreaList", { CityId: $("#CityId").val() }, function (data) {
+                    $("#AreaId").empty();
+
+                    $.each(data, function (index, row) {
+                        $("#AreaId").append("<option value='" + row.AreaId + "'>" + row.Name + "</option>")
+
+                    });
+                });
+            });
+
+
+
+
+
+        });
+    </script>
+
+    <script>
+        function showImage(src, target) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                target.src = fr.result; //<img src="H://file1.jpg" />
+                document.getElementById('DbImg').style["display"] = "none";
+            }
+            fr.readAsDataURL(src.files[0]);
+        }
+        function putImage() {
+            if (!document.getElementById("image1").files[0].type.match('image.*')) {
+                document.getElementById("ShowImage").style["display"] = "none";
+                document.getElementById("Error").innerHTML = "Please Select Image File";
+                document.getElementById("image1").value = "";
+            }
+            else {
+                document.getElementById("Error").innerHTML = "";
+                var src = document.getElementById("image1");
+                var target = document.getElementById("ShowImage");
+                target.style["display"] = "block";
+                showImage(src, target);
+            }
+        }
+        document.getElementById('image1').addEventListener('change', putImage, false);
+    </script>
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@section Styles{
+    <style>
+        #ShowImage {
+            display: none;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 10px 5px 0 0;
+            float: left;
+        }
+
+        #Error {
+            color: red;
+        }
+    </style>
+}
+

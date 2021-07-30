@@ -1,0 +1,81 @@
+﻿
+@model  SanayeeIdentity_5.Data.Schedual
+
+<div>
+    <h4>Schedual</h4>
+    <hr />
+    @{
+
+        string v = "block";
+        if (Model.Requests.Count>0)
+        {
+            v = "none";
+        }
+
+
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Worker.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Worker.UserID)
+        </dd>
+
+        <dt>
+            Requests
+        </dt>
+
+        <dd style="display:@v ">
+            @Html.ActionLink("Delete", "DeleteScedual", new { Scedualid = Model.ScedualId })
+        </dd>
+        <dd style="display:@v ">
+            @Html.ActionLink("Edit", "EditScedual", new { ScedualId = Model.ScedualId })
+        </dd>
+    </dl>
+</div>
+

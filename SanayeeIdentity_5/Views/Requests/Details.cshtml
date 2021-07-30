@@ -1,0 +1,50 @@
+﻿@model SanayeeIdentity_5.Data.Request
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Done)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Done)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressDetail.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressDetail.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schedual.PaidRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schedual.PaidRate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,102 @@
+﻿@model SanayeeIdentity_5.Data.Request
+@using SanayeeIdentity_5.Models
+<div >
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @{ ApplicationUser user = new ApplicationDbContext().Users.Find(Model.Userid); }
+
+
+        <dt>
+            Client
+        </dt>
+
+        <dd>
+            @user.Name
+        </dd>
+        <dt>
+            Client Email
+        </dt>
+
+        <dd>
+            @user.Email
+        </dd>
+
+        <dt>
+            Client Phone
+        </dt>
+
+        <dd>
+            @user.PhoneNumber
+        </dd>
+
+        <dt>
+           Request Date
+        </dt>
+
+        <dd>
+            @Model.RequestDateTime
+        </dd>
+
+        <dt>
+            Area Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressDetail.Area.Name)
+        </dd>
+
+        <dt>
+            Addres Details
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressDetail.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schedual.PaidRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schedual.PaidRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Done)
+
+        </dt>
+
+        <dd>
+            @{@((Model.Done == true ? "تم" : "لم يتم").ToString());}
+
+            @*@Html.ActionLink("تم أنهائة", "RequstFinish", new { Requestid = Model.RequestId })*@
+            <br />
+            @using (Ajax.BeginForm("RequstFinish", "MainWorker", new AjaxOptions()
+            {
+                UpdateTargetId = "UpdatePanel" + Model.RequestId.ToString(),
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loadingpic",
+                OnBegin = "HideData",
+                OnComplete = "ShowData"
+
+            }))
+            {
+
+                @Html.Hidden("RequestId", Model.RequestId)
+
+                <input type="submit" name="btn2" value="انهاء" id="btn2" class="btn btn-success " />
+            }
+
+
+        </dd>
+    </dl>
+       
+
+   
+</div>
+
+
+
+

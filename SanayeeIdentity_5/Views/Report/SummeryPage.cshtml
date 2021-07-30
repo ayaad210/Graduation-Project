@@ -1,0 +1,78 @@
+﻿@model List<SanayeeIdentity_5.Data.RequstsInMonthOfYear_Result>
+
+@{
+    ViewBag.Title = "SummeryPage";
+}
+
+<h2>SummeryReport</h2>
+<div class="row">
+    <div style="display:inline-block" class="form-group col-lg-8">
+        @using (Ajax.BeginForm("SummeryPageAjax", new AjaxOptions()
+    {
+        UpdateTargetId = "Updatepanel",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "loadingpic",
+        OnBegin = "HideData",
+        OnComplete = "ShowData"
+    }))
+    {
+
+
+
+            @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownList("Years", ViewBag.Years as SelectList, "select Year", new { @class = "form-control col-lg-6" })
+
+
+
+
+
+            <input type="submit" name="btn2" value="Submit" id="btn2" class="btn btn-success form-control col-lg-6" />
+    }
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <a style="font-size:larger" href='@Url.Action("ReportsView")'> Get Printed Reports</a>
+    </div>
+</div>
+
+<hr />
+
+<div id="loadingpic" style="display:none">
+    <img id="loading" alt="Loading Image" src="~/Content/Images/1.gif" />
+</div>
+
+<div id="Updatepanel" class="row">
+
+    @Html.Partial("RequstsInMonthParial", Model)
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+
+        function HideData() {
+            document.getElementById("UpdatePanel").style.display ="none" ;
+
+        }
+        function ShowData() {
+            document.getElementById("UpdatePanel").style.display = "block";
+
+        }
+
+    </script>
+
+
+
+}

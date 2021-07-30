@@ -1,0 +1,96 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Data.Worker>
+@using SanayeeIdentity_5.Models;
+
+<table class="table" id="UpdatePanel">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SBIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onwork)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TotalRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoBin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type.Name)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        string v = "block";
+        if (item.Scheduals.Count > 0)
+        {
+            v = "none";
+        }
+
+
+
+        <tr>
+            <td>
+                @{ApplicationUser us = new ApplicationDbContext().Users.Find(item.UserID);}
+                <h3> @us.Name</h3>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SBIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Onwork)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalRate)
+            </td>
+            <td>
+
+                <div class="col-md-10">
+                    @*@Html.EditorFor(m => m.Name, new { @class = "form-control" })*@
+                    @{
+                        var imgsrc = string.Empty;
+                        if (item.PhotoBin != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.PhotoBin);
+                            imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        }
+                        else
+                        {
+
+                            imgsrc = "/Images/pT78y5n8c.jpg";
+                        }
+
+                    }
+
+                    <img src="@imgsrc" width="100" height="100" id="DbImg" />
+
+
+
+                </div>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit Status", "Edit", new { id = item.WorkerId }) |
+
+                @Html.ActionLink("Manage Scedusls", "WorkerScheduals", new { WorkId = item.WorkerId })
+            </td>
+            <td style="display:@v">
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkerId })
+        </td>
+    </tr>
+                        }
+
+</table>

@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="~/Content/themes/RemoveError.css" rel="stylesheet" />
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/FetoCss")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("styles", false)
+    @*add by mo-feto*@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+
+</head>
+
+<body>
+
+    @*add by mo Feto Seach for PreLoader*@
+    <header class="main-header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="auto-box">
+                <div class="row clearfix">
+
+                    <div class="cont-info col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        Do You Have Any Questions? Call Us  <span>+2 01206312998</span>  Or Send An Email <a href="mailto:support@email.com">support@email.com</a>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                        Opening Hours : <span>Monday to Saturday - 8am to 9pm</span>   Contact : <span>+2 01206312998</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="nav-container">
+
+            <div class="auto-box">
+                <div class="row clearfix">
+                    <!-- Logo -->
+                    @*<div class="col-md-3 col-sm-3 col-xs-6 logo"><a href="#"><img class="img-responsive" src="images/logo.png" alt=""></a></div>*@
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <!-- Main Menu -->
+                    <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
+                        <ul>
+                            <li class="current">
+                                <a href="index-2.html">Home</a>
+                                <ul class="sub-menu">
+                                    <li><a href="index-2.html">Home One</a></li>
+                                    <li><a href="index-3.html">Home Two</a></li>
+                                    <li><a href="index-4.html">Home Three</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul class="sub-menu">
+                                    <li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="qa.html">Q & A</a></li>
+                                    <li class="dropdown">
+                                        <a href="gallery-2-col.html">Gallery</a>
+                                        <ul class="submenu">
+                                            <li><a href="gallery-2-col.html">Gallery Two Col</a></li>
+                                            <li><a href="gallery-2-col-full.html">Gallery Two Col Full Width</a></li>
+                                            <li><a href="gallery-3-col.html">Gallery Three Col</a></li>
+                                            <li><a href="gallery-3-col-full.html">Gallery Three Col Full Width</a></li>
+                                            <li><a href="gallery-4-col.html">Gallery Four Col</a></li>
+                                            <li><a href="gallery-4-col-full.html">Gallery Four Col Full Width</a></li>
+                                            <li><a href="gallery-6-col.html">Gallery Six Col</a></li>
+                                            <li><a href="gallery-6-col-full.html">Gallery Six Col Full Width</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="features.html">Features</a></li>
+                            <li>
+                                <a href="about-us.html">About us</a>
+                                <ul class="sub-menu">
+                                    <li><a href="our-team.html">Our Team</a></li>
+                                    <li><a href="our-doctors.html">Our Doctors</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="services.html">Services</a>
+                                <ul class="sub-menu">
+                                    <li><a href="services.html">Dental Implants</a></li>
+                                    <li><a href="services.html">Medical Research</a></li>
+                                    <li><a href="services.html">Medical Counseling</a></li>
+                                    <li><a href="services.html">Pharmaceutical Advice</a></li>
+                                    <li><a href="services.html">Blood Bank</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="blog.html">Blog</a>
+                                <ul class="sub-menu">
+                                    <li><a href="blog-full-width.html">Blog Full Width</a></li>
+                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                    <li><a href="blog-left-right-sidebar.html">Blog Left Right Sidebar</a></li>
+                                    <li><a href="blog-detail.html">Single Post</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="contact-us.html">Contact Us</a>
+                                <ul class="sub-menu">
+                                    <li><a href="contact-us-2.html">Contact Us 2</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Toggle icon -->
+                    <div class="toggle-icon"></div>
+                    <!-- Mobile Menu -->
+                    @*//6 hours then i discover i could make it with hidden*@
+                    <nav class="mobile-menu hidden-lg " id="alter-nav">
+                        <div class="nav-box">
+                            <ul>
+                                <li class="current">
+                                    <a href="index-2.html">Home</a>
+                                    <span class="toggle-icon"></span>
+
+                                </li>
+                                <li>
+                                    <a href="#">Pages</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="qa.html">Q & A</a></li>
+                                        <li class="dropdown">
+                                            <a href="gallery-2-col.html">Gallery</a>
+                                            <span class="toggle-icon"></span>
+                                            <ul class="submenu">
+                                                <li><a href="gallery-2-col.html">Gallery Two Col</a></li>
+                                                <li><a href="gallery-2-col-full.html">Gallery Two Col Full Width</a></li>
+                                                <li><a href="gallery-3-col.html">Gallery Three Col</a></li>
+                                                <li><a href="gallery-3-col-full.html">Gallery Three Col Full Width</a></li>
+                                                <li><a href="gallery-4-col.html">Gallery Four Col</a></li>
+                                                <li><a href="gallery-4-col-full.html">Gallery Four Col Full Width</a></li>
+                                                <li><a href="gallery-6-col.html">Gallery Six Col</a></li>
+                                                <li><a href="gallery-6-col-full.html">Gallery Six Col Full Width</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="features.html">Features</a></li>
+                                <li>
+                                    <a href="about-us.html">About us</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="our-team.html">Our Team</a></li>
+                                        <li><a href="our-doctors.html">Our Doctors</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="services.html">Services</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="services.html">Dental Implants</a></li>
+                                        <li><a href="services.html">Medical Research</a></li>
+                                        <li><a href="services.html">Medical Counseling</a></li>
+                                        <li><a href="services.html">Pharmaceutical Advice</a></li>
+                                        <li><a href="services.html">Blood Bank</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="blog.html">Blog</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-full-width.html">Blog Full Width</a></li>
+                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                        <li><a href="blog-left-right-sidebar.html">Blog Left Right Sidebar</a></li>
+                                        <li><a href="blog-detail.html">Single Post</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="contact-us.html">Contact Us</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <!-- <li><a href="contact-us-2.html">Contact Us 2</a></li> -->
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Nav Container End -->
+        <!-- Nav Container End -->
+    </header>
+
+    <!-- END Header -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer></footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/FetoScript")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

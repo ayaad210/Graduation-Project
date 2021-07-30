@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Models.ApplicationUser>
+
+<div id="UpdatePanel">
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+
+
+
+
+                <td>
+                    @Html.ActionLink("EditEmployee", "EditEmployee", new { EmpId = item.Id }) |
+
+                    @Html.ActionLink("DeleteEmployee", "DeleteEmployee", new { EmpId = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

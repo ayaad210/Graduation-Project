@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Data.Request>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+@foreach (var item in Model)
+{
+    <div id=@{@("UpdatePanel" + item.RequestId.ToString()); }>
+
+        @Html.Partial("RequestPartial", item)
+        @*googel map feto*@
+        @{
+            <span>@item.AdressDetail.Map.Latitude</span>
+            <span>@item.AdressDetail.Map.Longitude</span>
+            if (item.AdressDetail.Map.Latitude == 0 || item.AdressDetail.Map.Longitude == 0)
+            {
+                <iframe id="googel-map" width="300" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src="https://maps.google.co.uk?output=embed"></iframe>
+            }
+            else
+            {
+                <iframe id="googel-map" width="300" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src='https://maps.google.co.uk?q="@item.AdressDetail.Map.Latitude,@item.AdressDetail.Map.Longitude"&z=40&output=embed'></iframe>
+            }
+        }
+    </div>
+
+
+
+            }
+<div id="loadingpic" style="display:none">
+    <img id="loading" alt="Loading Image" src="~/Content/Images/1.gif" />
+</div>
+
+
+
+@section Scripts{
+
+
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+
+        function HideData() {
+            document.getElementById("UpdatePanel").style.display ="none" ;
+
+        }
+        function ShowData() {
+            document.getElementById("UpdatePanel").style.display = "block";
+
+        }
+    </script>
+}
+@section Styles{
+    <style>
+        td {
+            vertical-align: middle;
+        }
+
+        .ProductImage {
+            height: 50px;
+            border: 1px solid #000;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+    </style>
+}

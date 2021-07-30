@@ -1,0 +1,93 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Data.Request>
+@using SanayeeIdentity_5.Models
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+@foreach (var item in Model)
+{
+
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @{ ApplicationUser user = new ApplicationDbContext().Users.Find(item.Userid); }
+
+
+        <dt>
+            Client
+        </dt>
+
+        <dd>
+            @user.Name
+        </dd>
+        <dt>
+            Client Email
+        </dt>
+
+        <dd>
+            @user.Email
+        </dd>
+
+        <dt>
+            Client Phone
+        </dt>
+
+        <dd>
+            @user.PhoneNumber
+        </dd>
+
+
+
+        <dt>
+            Area Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.AdressDetail.Area.Name)
+        </dd>
+
+        <dt>
+            Addres Details
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.AdressDetail.Text)
+        </dd>
+
+    
+        <dt>
+            @Html.DisplayNameFor(model => model.Done)
+
+        </dt>
+
+        <dd>
+            @{@((item.Done == true ? "قبل" : "لم يقبل بعد").ToString());}
+
+
+        </dd>
+
+
+        <dt>
+           
+
+        </dt>
+
+        <dd style="display:@{@((item.Done == true ? "none":"block").ToString());}">
+            @Html.ActionLink("Delete", "DeleteClientRequest", new { Reqid = item.RequestId, ClientId=item.Userid })
+
+
+
+
+
+
+        </dd>
+    </dl>
+
+
+
+
+
+
+    }

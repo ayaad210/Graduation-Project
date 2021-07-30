@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Models.WorkerViewCardModelcs>
+@*<span>@item.SBIN</span>
+    <span>@item.WorkerId</span>
+    <span>@item.UserName</span>*@
+<span>hello </span>
+<section class="section-container bord">
+    <section class="meet-the-team">
+
+        <h1 class="border-line-center text-center">Workers</h1>
+        <div class="center">
+            <div class="clearfix row">
+                @foreach (var item in Model)
+                {
+
+
+                    @*here foreach*@
+                    <!-- Member 1 -->
+                    <section class="meet-the-team">
+                        <article class="member col-lg-4 col-md-4 col-sm-5 col-xs-12">
+                            <figure><img src="~/Content/images/resource/team-1.jpg " alt="image not supported yet" /><a class="overlay"></a></figure>
+                            <div class="member-info">
+                                <h4>Dr. Jack Johnson</h4>
+                                <h5><a href="#">Rehabilitation Therapy</a></h5>
+                                <progress>here is the rate</progress>
+                                <h4 class="city">@item.SBIN</h4>
+                                <h4>@item.WorkerId</h4>
+                            </div>
+
+                            <ul class="social clearfix anim-3-all">
+                                <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                                <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                                <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                                <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                            </ul>
+                        </article>
+                    </section>
+
+
+                }
+            </div>
+        </div>
+    </section>
+</section>
+

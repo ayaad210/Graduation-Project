@@ -1,0 +1,137 @@
+﻿
+* {
+    box-sizing: border-box;
+    
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+
+
+.name {
+    margin: 0;
+    text-align: center;
+    font-size: 4em;
+    font-family: "BOOTERZZ";
+    font-weight: normal;
+    color: white;
+}
+
+.large-name {
+    font-size: 10em;
+}
+
+.section-container {
+    margin: 1em;
+}
+
+.containerr {
+    max-width: 900px;
+    margin: 10px auto;
+    padding: 0.1em;
+}
+
+.section-header {
+    font-family: 'Metal Mania', cursive;
+    font-weight: normal;
+    color: #56ccf2;
+    font-size: 36px;
+    text-align: center;
+}
+
+.myimage {
+    height: 270px;
+    width: 270px;
+    border-radius: 50%;
+    margin: 8px;
+    float: left;
+}
+
+.main-footer {
+    background-color: #56ccf2;
+    color: aliceblue;
+    padding: .25em 0;
+}
+
+.main-footer-container {
+    display: flex;
+}
+
+    .main-footer-container ul {
+        flex-grow: 1;
+        text-align: end;
+    }
+
+.nav-footer li {
+    padding: 0 .5em;
+    display: inline;
+}
+
+.nav-footer img {
+    width: 30px;
+    height: 30px;
+    
+}
+
+
+
+.btn {
+    text-align: center;
+    vertical-align: middle;
+    padding: .67em;
+    cursor: pointer;
+}
+
+
+
+.tour-row {
+    border-bottom: 1px solid black;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+    .tour-row:last-child {
+        border-bottom: none;
+    }
+
+
+
+
+.row-btn {
+    max-width: 19%;
+    color: #fff;
+    background-color: #56ccf2;
+    border: none;
+    border-radius: .3em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+    .row-btn:hover {
+        background-color: #2d9cdb;
+        border: 1px solid slategray;
+    }
+
+.pj {
+    width: 15%;
+}
+
+.lan {
+    margin-left: 2%;
+    width: 46%;
+}
+
+.y {
+    width: 20%;
+}
+
+.bord {
+    border: .2em #2d9cdb dashed;
+    border-spacing: 1em;
+    padding: 10px;
+}

@@ -1,0 +1,450 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Models.WorkerViewCardModelcs>
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@using SanayeeIdentity_5.Models;
+@{ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>
+          ().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()); }
+
+<section class="section-container bord">
+    <section class="meet-the-team">
+        <div id="MyAlert" class="alert alert-success ">
+            <a href="#" onclick="noclose();" id="LINKCLOSE" class="close" >&times;</a>
+            <strong>Successfully</strong> The Request Has Been Send To Worker You will Receive call in 5 minit
+        </div>
+        <h1 class="border-line-center text-center">Workers</h1>
+        <div class="center">
+            <div class="clearfix row">
+                @foreach (var item in Model)
+                {
+
+                    //////
+
+
+                    var imgsrc = string.Empty;
+                    if (item.PhotoBin != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.PhotoBin);
+                        imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                    else
+                    {
+
+                        imgsrc = "/Content/images/resource/team-1.jpg";
+                    }
+
+
+
+
+                    /////
+                    <section class="meet-the-team">
+
+                        @* image style modified by mo-feto to fit the diffrence between uploaded image size and to fix design issue*@
+                        <article class="member col-lg-4 col-md-4 col-sm-5 col-xs-12" style="border:1px solid rgba(0,0,0,0.3)">
+                            <figure><img src="@imgsrc" alt="image not supported yet" class="img-responsive" style="height:250px;" /><a class="overlay"></a></figure>
+                            <div class="member-info center">
+
+                                <h4>@item.Name</h4>
+                                <h5><a href="#">@item.TypeName</a></h5>
+                                <h4>@item.SBIN</h4>
+                                <h4>@item.PhoneNumber</h4>
+                                <progress style="border:1px solid rgba(0,0,0,0.3); border-radius:3px; box-shadow:0 0 5px #2187e7;" max="@item.MaxRateofWorkers" value="@item.TotalRate"></progress>
+
+                                <h4>@item.Email</h4>
+
+                            </div>
+                            <div class="dl-horizontal">
+                                @*<a href="#" class="btn btn-success" data-toggle="modal" data-target="#myModal"><span>Select Me</span></a>*@
+                                @{ if (item?.Available == false || item?.Onwork == false)
+                                    {//the ?. mean if the attribute is null don't produce null reference error just go to else  mo-feto.
+                                        @*<a href="#" class="btn btn-success" onclick="ConfirmAdding(@item.WorkerId,'@item.Name','@imgsrc')"><span class="glyphicon glyphicon-book"></span><span>&nbsp;Select Me</span></a>
+                                        <a href="#" class="btn btn-success" onclick="Rate(@item.WorkerId,'@imgsrc')"><Span class="glyphicon glyphicon-fire"></Span><span>&nbsp;Rate Me</span></a>
+                                        <a href="#" class="btn btn-danger" onclick="Complain(@item.WorkerId,'@imgsrc')"><Span class="glyphicon glyphicon-check"></Span><span>&nbsp;Complain</span></a>*@
+                                        <h3 style="color:slategray">This Worker Isn't Available</h3>
+                                    }
+                                    else
+                                    {
+                                        //if the available is null where i make it null in the search with combox i didn't get it'
+                                        <a href="#" class="btn btn-success" onclick="ConfirmAdding(@item.WorkerId,'@item.Name','@imgsrc')"><span class="glyphicon glyphicon-book"></span><span>&nbsp;Select Me</span></a>
+                                        <a href="#" class="btn btn-success" onclick="Rate(@item.WorkerId,'@imgsrc')"><Span class="glyphicon glyphicon-fire"></Span><span>&nbsp;Rate Me</span></a>
+                                        <a href="#" class="btn btn-danger" onclick="Complain(@item.WorkerId,'@imgsrc')"><Span class="glyphicon glyphicon-check"></Span><span>&nbsp;Complain</span></a>
+
+                                    }
+                                }
+                            </div>
+                            <div class="center dl-horizontal">
+                                <ul class="social clearfix anim-3-all">
+                                    <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                                    <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                                    <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                                    <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </section>
+
+                }
+            </div>
+        </div>
+
+    </section>
+    <div class="alert alert-info">
+        <span class="text-danger" id="OrderError"></span>
+    </div>
+  </section>
+
+@*Confirm Selection*@
+<div class="container" style="width:40%;margin-top:20%">
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Select Worker</h3>
+                </div>
+                <div class="modal-body center">
+                    <h4>Are you sure ? You want to Select This Worker  <span id="WorkerName" class="danger label-danger">Name</span></h4>
+                    <h5>Please Insert Your Phone Number</h5>
+                    <div style="border:1px dashed #0094ff; padding:10px">
+                        <img src="~/Content/images/gallery/3.jpg" width="300" id="WorkerImage" style="margin-top:2%; padding:10px; border:1px dashed #4cff00" />
+                        <form id="myForm">
+                            @*need to check this very good*@
+                            <div><label for="PhoneNumber">Phone Number</label></div>
+                            <div class="form form-group">
+                                <input class="form-control" style="margin:auto" maxlength="11" placeholder="Enter Vaid Egypatin Number" readonly type="number" id="PhoneNumber" value="@user.PhoneNumber" />
+                                <div><label for="UserName">Name</label></div>
+                                <input class="form-control" style="margin:auto" placeholder="Please Enter Your Name" required type="text" readonly id="UserName" value="@user.Name" />
+                                <small class="text-muted">We'll Never Share Your Data with any Body.</small><br />
+                                <span class="center error text-danger"></span><br />
+                                <span class="center error2 text-danger"></span>
+                            </div>
+
+                            @*need to check this very good*@
+                        </form>
+                        <div style="text-align:center;display:none" id="loaderDiv">
+                            <img src="~/Content/images/fancybox/fancybox_loading@2x.gif" width="150" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <input type="submit" id="submit" class="btn btn-success" value="Confirm" onclick="AddRequest()" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    @*hidden field for storing current employeeId*@
+
+</div>
+<input type="hidden" id="hiddenWorkerId" />
+<input type="hidden" id="hiddenPhonenumber" />
+<input type="hidden" id="workername" />
+<input type="hidden" id="workerrate" />
+<div class="container" style="width:40%;margin-top:20%">
+
+
+    <div class="modal fade" id="RateModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Rate Worker</h3>
+                </div>
+                <div class="modal-body center">
+
+                    <div style="border:1px dashed #0094ff; padding:10px">
+                        <img src="~/Content/images/gallery/3.jpg" width="300" id="WorkerImageRate" style="margin-top:2%; padding:10px; border:1px dashed #4cff00" />
+                        <form id="myForm">
+                            <section class="center">
+                                <label style="padding-left:5px;">One</label>
+                                <input type="radio" name="example" onclick="ConfirmRate()" value="1" />  |
+                                <label style="padding-left:5px;">Two</label>
+                                <input type="radio" name="example" onclick="ConfirmRate()" value="2" />|
+                                <label style="padding-left:5px;">Three</label>
+                                <input type="radio" name="example" onclick="ConfirmRate()" value="3" />  |
+                                <label style="padding-left:5px;">Four</label>
+                                <input type="radio" name="example" onclick="ConfirmRate()" value="4" />  |
+                                <label style="padding-left:5px;">Five</label>
+                                <input type="radio" name="example" onclick="ConfirmRate()" value="5" />
+                            </section>
+
+
+                        </form>
+                        <div style="text-align:center;display:none" id="loaderDiv">
+                            <img src="~/Content/images/fancybox/fancybox_loading@2x.gif" width="150" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <input type="submit" id="submit" class="btn btn-success" value="Confirm" onclick="ConfirmRate()" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@*Complains*@
+<div class="container" style="width:40%;margin-top:20%">
+
+
+    <div class="modal fade" id="ComplineModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Complain</h3>
+                </div>
+                <div class="modal-body center">
+
+                    <div style=" padding:10px">
+                        <img src="~/Content/images/gallery/3.jpg" width="300" id="WorkerImageComp" style="margin-top:2%; padding:10px; border:1px dashed #4cff00" />
+
+                        <div class="form form-group">
+                            <div class="center"><label for="Head">Compline Type</label></div>
+                            @*<div>@Html.TextBox("Head", null, new { @id = "Head", @class = "Address form-control center", @placeholder = "Header Of Complain" })</div>*@
+
+                            <input class="form-control" style="margin:auto" placeholder="Header Of Complain" name="Head" id="Head" />
+                            <div class="center"><label for="complain">Complain Details</label></div>
+                            <div>@Html.TextArea("complain", null, 3, 8, new { @id = "ComplainDetiled", @class = "Address form-control", @style = "margin:auto;", @placeholder = "Enter Detiled Complain here" })</div>
+
+                        </div>
+
+                        <div style="text-align:center;display:none" id="loaderDiv">
+                            <img src="~/Content/images/fancybox/fancybox_loading@2x.gif" width="50" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <input type="submit" id="submit" class="btn btn-success" value="Send" onclick="ConfirmSending()" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#MyAlert").hide();
+        //after 5 second hide the alert 
+        setTimeout(function () {
+            $("#MyAlert").hide('fade');
+
+        },5000) 
+    })
+
+    function noclose() {
+
+        $("#MyAlert").hide('fade');
+        
+    }
+   
+       
+    
+    function Complain(WorkerId, img) {
+        $("#hiddenWorkerId").val(WorkerId);
+        $("#ComplineModel").modal('show');
+        $("#WorkerImageComp").attr("src", img);
+        //$("#MyAlert").fadeOut(2000);
+
+    }
+    function ConfirmSending() {
+        var ComplainHead = document.getElementById("Head").value;
+        var Complain = document.getElementById("ComplainDetiled").value;
+        var WorkerId = $("#hiddenWorkerId").val();
+        $.ajax({
+
+            type: "POST",
+            url: "/Requests/InsertComplain",
+            data: { WorkerId: WorkerId, Head: ComplainHead, Body: Complain },
+            success: function (Data) {
+                $("#loaderDiv").hide();
+                $("#ComplineModel").modal("hide");
+                $("#OrderError").text("Your Complain Has Been Send Thank You For Your FeedBack");
+                $("#OrderError").addClass("text-success");
+
+
+            },
+            error: function () {
+                $("#OrderError").text("Something Wrong!");
+                $("#OrderError").addClass("text-danger");
+            }
+
+        })
+    }
+
+
+    function Rate(WorkerId, img) {
+        $("#hiddenWorkerId").val(WorkerId);
+
+        $("#RateModel").modal('show');
+        $("#WorkerImageRate").attr("src", img);
+    }
+    function ConfirmRate() {
+        var x;
+        var workerid = $("#hiddenWorkerId").val()
+        var type = document.getElementsByName("example");
+        if (type[0].checked) {
+            x = type[0].value;
+
+
+        }
+        if (type[1].checked) {
+            x = type[1].value;
+
+
+        }
+        if (type[2].checked) {
+            x = type[2].value;
+
+        }
+        if (type[3].checked) {
+            x = type[3].value;
+
+        }
+        if (type[4].checked) {
+            x = type[4].value;
+
+        }
+        //$("#workerrate").val(x);
+        //var rate = $("#workerrate").val();
+        var workerid = $("#hiddenWorkerId").val();
+        $.ajax({
+
+            type: "POST",
+            url: "/Requests/InsertingRateofWorker",
+            data: { workerId: workerid, rate: x },
+            success: function (Data) {
+                $("#loaderDiv").hide();
+                $("#RateModel").modal("hide");
+                $("#OrderError").text("Order Done ...  Mr");
+                $("#OrderError").addClass("text-success");
+
+            },
+            error: function () {
+                $("#OrderError").text("Orders Not Created ...!!");
+            }
+
+        })
+
+    }
+
+    var lat, long;
+    function ConfirmAdding(WorkerId, Email, img) {
+        
+        $("#hiddenWorkerId").val(WorkerId);
+        $("#img").val(img);
+        $("#myModal").modal('show');
+
+
+
+        $("workername").val(Email);
+
+
+
+        $("#WorkerName").html(Email);
+        $("#WorkerImage").attr("src", img);
+
+
+        //geting the lngituide and mangitude here  directly
+        fetofuntion = function (pos) {
+
+            lat = pos.coords.latitude,
+                long = pos.coords.longitude,
+                //contine lat+long
+                coords = lat + ',' + long;
+            //alert("2 "+lat + "  " + long);
+        }
+
+
+        //the callback funtion to use the data in variables and use it later feto.
+        navigator.geolocation.getCurrentPosition(fetofuntion);
+
+
+    }
+
+
+    var AddRequest = function () {
+        //var regx = /(012|011|010|015)\d{8}/gi;
+        var isvalid = true;
+
+        var numb = document.getElementById("PhoneNumber").value;
+        var username = document.getElementById("UserName").value;
+        //var img = document.getElementById("img").value;
+        $("#hiddenPhonenumber").val(numb);
+
+        //if (regx.test(numb)) {
+
+        //    $("#PhoneNumber").siblings('span.error').text("");
+        //    var isvalid = true;
+
+        //} else {
+        //    $("#PhoneNumber").siblings('span.error').text("Only Egyptain Phones Number Accepted");
+        //    var isvalid = false;
+        //}
+        //if (username == "" || username == null) {
+        //    $("#PhoneNumber").siblings('span.error2').text("We need Your Name to Contact You");
+        //    isvalid = false;
+        //} else {
+        //    $("#PhoneNumber").siblings('span.error2').text("");
+        //    var isvalid = true;
+        //}
+        alert("before sending" + lat + "  " + long);
+
+        if (isvalid) {
+            $("#loaderDiv").show();
+
+            var workerid = $("#hiddenWorkerId").val();
+            ////filed attemp to get the name of employee :*(
+            //$("#WorkerName").val(workerid);
+            //$("#myModal #WorkerName").text("HelloWorld");
+            //$("#myModal #WorkerName").html(workerid);
+            $.ajax({
+
+                type: "POST",
+                url: "/Requests/InsertRequest",
+                data: { WorkerId: workerid, PhoneNumber: numb, Name: username, Latitude: lat, longitude: long },
+                success: function (Data) {
+                    $("#loaderDiv").hide();
+
+                    $("#myModal").modal("hide");
+                    $("#MyAlert").show('fade');
+                    $("#OrderError").text("Order Has Been sucessfully done");
+                   
+                    $("#OrderError").addClass("text-success");
+                    //alert(Data);
+                    //var Text = JSON.parse(Data)
+                    //$("#OrderError").text(Data);
+                },
+                error: function () {
+                    $("#MyAlert").show().fadeToggle(5000);
+                 
+                    
+                    $("#OrderError").text("You Have did something Wrong i guess you click confirm without selecting rate");
+                    $("#OrderError").addClass("text-danger");
+                }
+
+            })
+
+        }
+    }
+</script>

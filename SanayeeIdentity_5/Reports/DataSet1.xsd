@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="RequstsInfoTableAdapter" GeneratorDataComponentClassName="RequstsInfoTableAdapter" Name="RequstsInfo" UserDataComponentName="RequstsInfoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="[aspnet-SanyeeIdentity6].dbo.RequstsInfo" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT typename, workrrname, cityid, AreaName, year, month, NumofReqursts FROM dbo.RequstsInfo</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="typename" DataSetColumn="typename" />
+              <Mapping SourceColumn="workrrname" DataSetColumn="workrrname" />
+              <Mapping SourceColumn="cityid" DataSetColumn="cityid" />
+              <Mapping SourceColumn="AreaName" DataSetColumn="AreaName" />
+              <Mapping SourceColumn="year" DataSetColumn="year" />
+              <Mapping SourceColumn="month" DataSetColumn="month" />
+              <Mapping SourceColumn="NumofReqursts" DataSetColumn="NumofReqursts" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RequstsInfo" msprop:Generator_TableClassName="RequstsInfoDataTable" msprop:Generator_TableVarName="tableRequstsInfo" msprop:Generator_TablePropName="RequstsInfo" msprop:Generator_RowDeletingName="RequstsInfoRowDeleting" msprop:Generator_RowChangingName="RequstsInfoRowChanging" msprop:Generator_RowEvHandlerName="RequstsInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="RequstsInfoRowDeleted" msprop:Generator_UserTableName="RequstsInfo" msprop:Generator_RowChangedName="RequstsInfoRowChanged" msprop:Generator_RowEvArgName="RequstsInfoRowChangeEvent" msprop:Generator_RowClassName="RequstsInfoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="typename" msprop:Generator_ColumnVarNameInTable="columntypename" msprop:Generator_ColumnPropNameInRow="typename" msprop:Generator_ColumnPropNameInTable="typenameColumn" msprop:Generator_UserColumnName="typename" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="workrrname" msprop:Generator_ColumnVarNameInTable="columnworkrrname" msprop:Generator_ColumnPropNameInRow="workrrname" msprop:Generator_ColumnPropNameInTable="workrrnameColumn" msprop:Generator_UserColumnName="workrrname">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cityid" msprop:Generator_ColumnVarNameInTable="columncityid" msprop:Generator_ColumnPropNameInRow="cityid" msprop:Generator_ColumnPropNameInTable="cityidColumn" msprop:Generator_UserColumnName="cityid" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AreaName" msprop:Generator_ColumnVarNameInTable="columnAreaName" msprop:Generator_ColumnPropNameInRow="AreaName" msprop:Generator_ColumnPropNameInTable="AreaNameColumn" msprop:Generator_UserColumnName="AreaName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="year" msprop:Generator_ColumnVarNameInTable="columnyear" msprop:Generator_ColumnPropNameInRow="year" msprop:Generator_ColumnPropNameInTable="yearColumn" msprop:Generator_UserColumnName="year" type="xs:int" minOccurs="0" />
+              <xs:element name="month" msprop:Generator_ColumnVarNameInTable="columnmonth" msprop:Generator_ColumnPropNameInRow="month" msprop:Generator_ColumnPropNameInTable="monthColumn" msprop:Generator_UserColumnName="month" type="xs:int" minOccurs="0" />
+              <xs:element name="NumofReqursts" msprop:Generator_ColumnVarNameInTable="columnNumofReqursts" msprop:Generator_ColumnPropNameInRow="NumofReqursts" msprop:Generator_ColumnPropNameInTable="NumofRequrstsColumn" msprop:Generator_UserColumnName="NumofReqursts" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

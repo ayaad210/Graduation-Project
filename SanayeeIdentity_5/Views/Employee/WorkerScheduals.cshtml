@@ -1,0 +1,20 @@
+﻿@model SanayeeIdentity_5.Models.workerSceduasModel
+
+@{
+    ViewBag.Title = "WorkerSceduals";
+}
+
+<h2>WorkerSceduasls</h2>
+@Html.ActionLink("Create New", "CreateScedualForWorker", "Employee", new { Workerid= Model.workerid },null)
+
+
+
+
+
+
+@foreach (var item in Model.List)
+{
+
+    @Html.Partial("ScedualParial", item);
+
+}

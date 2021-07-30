@@ -1,0 +1,253 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Data.Request>
+
+@{
+    ViewBag.Title = "Sany3e";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+   // Layout = "~/Views/Shared/_Feto.cshtml";
+}
+
+@*<div style="display:inline-block">
+    @using (Html.BeginForm("SearchWorkerByUsers", "Requests", FormMethod.Post))
+    {
+        <div>
+            <fieldset>
+                <legend> Search Full </legend>
+                <div> @Html.Label("SearchKey")</div> <div> @Html.TextBox("SearchKey", null, htmlAttributes: new { @class = "form-control" }) </div>
+                <input type="submit" name="btnsubmit" value="Search" class="btn btn-default " />
+            </fieldset>
+        </div>
+    }
+</div>*@
+<div style="display:inline-block ;">
+    @using (Ajax.BeginForm("SearchWorkerByUsers", new AjaxOptions()
+    {
+        UpdateTargetId = "WorkersDiv",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "loadingpic",
+        OnBegin = "HideData",
+        OnComplete = "ShowData"
+    }))
+    {
+        <div>
+            <fieldset>
+                <legend> Search Names </legend>
+                <label for="SearchKey"> Enter Name : </label>
+                @Html.TextBox("SearchKey", null, new { @class = "form-control", required = "required", placeholder = "اسم عامل هنا" })
+                <br />
+                <input type="submit" name="btn2" value="Search Ajax" id="btn2" class="btn btn-success " />
+            </fieldset>
+        </div>
+    }
+
+</div>
+
+
+<div class="form-inline center">
+    <h1>Requests Service</h1>
+    @if (ViewBag.CityID != null)
+    {
+        <div class="form-group">
+            <div><label for="City">City</label></div>
+            <div>@Html.DropDownList("City", ViewBag.CityID as SelectList, "--Select City--", new { @class = "City form-control" })</div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div><label for="Areas">Area</label></div>
+        <div>@Html.DropDownList("Areas", new SelectList(""), "--Select Area--", new { @class = "Areas form-control", @Required = true })</div>
+    </div>
+    <div class="form-group">
+        <div><label for="Type">Type</label></div>
+        <div>@Html.DropDownList("Type", ViewBag.TypeID as SelectList, "--Worker Type--", new { @class = "Worker form-control", @Required = true })</div>
+    </div>
+    <div class="form-group">
+        <div><label for="Address">Detailed Address</label></div>
+        <div>@Html.TextArea("Address", null, 3, 8, new { @class = "Address form-control", @placeholder = "Enter Detailed Address" })</div>
+        <span id="OrderError"></span>
+    </div>
+
+</div>
+
+
+<div id="loadingpic" style="display:none">
+    <img id="loading" alt="Loading Image" src="~/Content/Images/icons/toggle-icon-1.png" />
+</div>
+
+<div class="containerr" id="WorkersDiv">
+
+
+</div>
+
+
+<input type="hidden" id="CityName" value="" />
+@section styless{
+    <link href="~/Content/FetoStyle.css" rel="stylesheet" />
+
+
+}
+@section scripts{
+    @*download the nugets*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        function HideData() {
+            document.getElementById("WorkersDiv").style.display = "none";
+
+        }
+        function ShowData() {
+            document.getElementById("WorkersDiv").style.display = "block";
+
+        }
+    </script>
+
+
+    <script>
+
+        $("#Type").change(function () {
+
+            $.ajax({
+
+                type: 'get',
+                url: "/Requests/GetWorkerByCityAreaType",
+                data: { City: $("#City").val(), Area: $("#Areas").val(), Type: $("#Type").val() },
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+                    //we gonna load the partial view inside the Worker Div
+                    $("#WorkersDiv").html(response);
+                    $("#OrderError").text("");
+
+
+                },
+                error: function () {
+                    $("#OrderError").text("Don't Select  --Worker Type-- Idiot i will hack your device ");
+                    $("#OrderError").addClass("text text-danger");
+                    $("#WorkersDiv").html();
+                }
+            });
+        });
+
+        $("#Areas").change(function () {
+
+            $.ajax({
+
+                type: 'get',
+                url: "/Requests/GetWorkersByCityAndArea",
+                data: { City: $("#City").val(), Area: $("#Areas").val(), Type: $("#Type").val() },
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+                    //we gonna load the partial view inside the Worker Div
+                    $("#WorkersDiv").html(response);
+
+
+                },
+                error: function () {
+                    $("#OrderError").text("It Seem That Your Area Hasn't Workers Please Select option select-city then Your City");
+                    $("#WorkersDiv").html();
+                }
+            });
+        });
+    </script>
+    <script>
+
+
+        //the RequestDate to make it Datepicker
+
+        //when The Page first Load
+        $(document).ready(function () {
+
+            //var lat, long;
+            ////geting the lngituide and mangitude here  directly
+            //fetofuntion = function (pos) {
+
+            //     lat = pos.coords.latitude,
+            //        long = pos.coords.longitude,
+            //        //contine lat+long
+            //        coords = lat + ','+ long;
+
+            //}
+
+
+            ////the callback funtion to use the data in variables and use it later feto.
+            //navigator.geolocation.getCurrentPosition(fetofuntion);
+
+
+            $("#City option").click(function () {
+                console.log('click');
+            });
+
+
+            //get Workers by
+            $("#City").change(function () {
+                //continue from here take this lat and long and store it in the database
+                //alert("2 "+lat + "  " + long);
+                $.ajax({
+
+                    type: 'get',
+                    url: "/Requests/GetWorkersByCity",
+                    data: { City: $("#City option:selected").val(), Type: $("#Type").val() },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (response) {
+                        //we gonna load the partial view inside the Worker Div
+                        $("#WorkersDiv").html(response);
+
+
+                    },
+                    error: function () {
+                        $("#OrderError").text("If Your Area has No workers Select (Select-City) then Your City");
+                        $("#WorkersDiv").html().empty();
+                    }
+                });
+
+
+                $("#Areas").empty();
+                $.get("/Requests/GetAreas", { City: $("#City").val() }, function (data) {
+                    var s = "<option value=''> --SelectArea-- </option>"
+                    $.each(data, function (index, row) {
+
+
+                        s += "<option value='" + row.AreaId + "'>" + row.Name + "</option>";
+
+                    });
+                    $("#Areas").html(s);
+
+                });
+                // Geting the Worker from first select of the city
+
+
+            })
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+    </script>
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

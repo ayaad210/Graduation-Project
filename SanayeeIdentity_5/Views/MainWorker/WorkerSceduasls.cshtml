@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SanayeeIdentity_5.Data.Schedual>
+
+@{
+    ViewBag.Title = "WorkerSceduasls";
+}
+
+<h2>WorkerSceduasls</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+
+
+@foreach (var item in Model)
+{
+    
+        @Html.Partial("scedialPartial", item);
+   
+}
+
+
+

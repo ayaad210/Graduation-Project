@@ -1,0 +1,7 @@
+packages
+packages/**
+.vs
+.vs/**
+SanayeeIdentity_5/bin
+SanayeeIdentity_5/obj
+SanayeeIdentity_5/Migrations
